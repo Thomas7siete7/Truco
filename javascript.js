@@ -45,7 +45,7 @@ const cartas= [
     {numero: 12, palo: 'copa', valor: 7, id:40, tanto: 0}
 ]
 
-alert(`Hola  bienvenido a Truco online. Espero que tengas un agradable juego y logres ganar.`);
+// alert(`Hola  bienvenido a Truco online. Espero que tengas un agradable juego y logres ganar.`);
 
 let copiaCartas=[...cartas];
 let puntos=[ [] , [] ];
@@ -54,7 +54,7 @@ let manoJugador2= []; //Informacion para el usuario
 let guardarJugador1=[]; //Informacion para la logica
 let guardarJugador2= []; //Informacion para la logica
 let mesa=[]; //Informacion para ver resultado
-console.log(manoJugador1)
+
 
 function mezclar(jugador, guardado){
     let random1=Math.trunc((Math.random()*40)+1);
@@ -78,48 +78,54 @@ function mezclar(jugador, guardado){
     }
     
   	randomizar(random1);
-  	randomizar(random2);								
+  	randomizar(random2);						
   	randomizar(random3);
 } 
-mezclar( manoJugador1, guardarJugador1);
+mezclar(manoJugador1, guardarJugador1);
 mezclar(manoJugador2, guardarJugador2);
 
+let mano1= document.getElementById('mano-1');
 
-function truco(turno, manoJugador){
-    let pregunta1=prompt(`Las cartas del jugador ${turno}: son ${manoJugador} ¿Qué desea hacer? ¿Cantar envido, truco, o callado?`);
+for(let i=0; i<mano1.length; i++){
+    let carta= document.getElementById('carta');
+    carta.innerText= manoJugador1[i];
+};
 
-    function turno1(){
-        if(pregunta1== 'Callado' ||pregunta1== 'callado' || pregunta1== 'truco' || pregunta1== 'Truco'){
-            let numeroJugada1= parseInt(prompt (`Qué carta desea jugar? Coloque SOLO el NUMERO. "Recuerde: ${manoJugador}"`));
-            let paloJugada1= prompt(`Ahora coloque SOLO el PALO. "Recuerde: ${manoJugador}"`);;
-            function puntaje (){
-                for(let i=0; i<copiaCartas.length;i++){
-                    if(copiaCartas[i].numero==numeroJugada1 && copiaCartas[i].palo==paloJugada1){
-                        mesa.push(copiaCartas[i].valor);
+// function truco(turno, manoJugador){
+//     let pregunta1=prompt(`Las cartas del jugador ${turno}: son ${manoJugador} ¿Qué desea hacer? ¿Cantar envido, truco, o callado?`);
+
+//     function turno1(){
+//         if(pregunta1== 'Callado' ||pregunta1== 'callado' || pregunta1== 'truco' || pregunta1== 'Truco'){
+//             let numeroJugada1= parseInt(prompt (`Qué carta desea jugar? Coloque SOLO el NUMERO. "Recuerde: ${manoJugador}"`));
+//             let paloJugada1= prompt(`Ahora coloque SOLO el PALO. "Recuerde: ${manoJugador}"`);;
+//             function puntaje (){
+//                 for(let i=0; i<copiaCartas.length;i++){
+//                     if(copiaCartas[i].numero==numeroJugada1 && copiaCartas[i].palo==paloJugada1){
+//                         mesa.push(copiaCartas[i].valor);
                             
-                    }
-                }
-            }
-            puntaje();
-        }else if(pregunta1== 'envido' || pregunta1== 'Envido'){
-            alert('Aún no tenemos disponible esa opcion! Pronto lo haremos.');
-            truco(turno, manoJugador);
-        }else{
-            alert('Opcion incorrecta');
-            truco(turno, manoJugador);
-        }
-    }
-    turno1();
-}
+//                     }
+//                 }
+//             }
+//             puntaje();
+//         }else if(pregunta1== 'envido' || pregunta1== 'Envido'){
+//             alert('Aún no tenemos disponible esa opcion! Pronto lo haremos.');
+//             truco(turno, manoJugador);
+//         }else{
+//             alert('Opcion incorrecta');
+//             truco(turno, manoJugador);
+//         }
+//     }
+//     turno1();
+// }
 
-truco(1, manoJugador1);
-alert('Turno jugador2');
-truco(2, manoJugador2);
+// truco(1, manoJugador1);
+// alert('Turno jugador2');
+// truco(2, manoJugador2);
 
-if(mesa[0]<mesa[1]){
-    alert('jugador2 ha ganado!!!!!!!');
-    puntos[1]+=1
-}else{
-    alert('jugador1 ha ganado!!!!!!!');
-    puntos[0]+=1;
-}
+// if(mesa[0]<mesa[1]){
+//     alert('jugador2 ha ganado!!!!!!!');
+//     puntos[1]+=1
+// }else{
+//     alert('jugador1 ha ganado!!!!!!!');
+//     puntos[0]+=1;
+// }
