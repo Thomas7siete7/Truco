@@ -1,0 +1,41 @@
+/* 1REM=10PX */
+html{
+	font-size: 62.5%
+}
+
+.main{
+    width: 95%;
+    height: 80rem;
+}
+
+.manoJugador{
+    height: 40rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    column-gap: 5rem;
+    margin-top: 5rem;
+    z-index: 0;
+}
+
+.mj_fix{
+    margin-top: 5rem;
+}
+
+.carta{
+    width: 20rem;
+    height: 25rem;
+}
+
+.canticos{
+    z-index: 1;
+    width: 10rem;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -30rem;
+    margin-left: 130rem;
+}
+.cantos{
+    width: 5rem;
+    height: 5rem;
+}
