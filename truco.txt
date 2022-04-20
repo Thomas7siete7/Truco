@@ -1,3 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavasCript</title>
+</head>
+<body>
+    <header class="header">
+        <ul class="header-ul">
+            <li><a href="">inicio</a></li>
+            <li><a href="">reglas</a></li>
+            <li><a href="">login</a></li> 
+        </ul>
+    </header>
+
+    <main class="main">
+        <div class="manoJugador" id="mano-1">
+            <input type="button" class="carta cartaJugador-1">
+            <input type="button" class="carta cartaJugador-1">
+            <input type="button" class="carta cartaJugador-1">
+        </div>
+
+        <div class="manoJugador" id="mano-2">
+            <input type="button" class="carta cartaJugador-2">
+            <input type="button" class="carta cartaJugador-2">
+            <input type="button" class="carta cartaJugador-2">
+        </div>
+    </main>
+
+    <aside class="puntos" id="puntos">
+        <p class="puntos-jugador" id="puntos-1"></p>
+        <p class="puntos-jugador" id="puntos-2"></p>
+    </aside>
+    <script src="javascript.js"></script>
+</body>
+</html>
+
+
 const cartas= [
     //ESPADA
     {numero: 1, palo: 'espada', valor: 14, id:1, tanto: 1},
