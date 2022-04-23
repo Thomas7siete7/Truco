@@ -53,8 +53,8 @@ let manoJugador1=[]; //Informacion para el usuario
 let manoJugador2= []; //Informacion para el usuario
 let guardarJugador1=[]; //Informacion para la logica
 let guardarJugador2= []; //Informacion para la logica
-let mesa=[]; //Informacion para ver resultado
-console.log(manoJugador1)
+let mesaValor=[]; //Informacion para ver resultado
+let mesaVer=[];
 
 function mezclar(jugador, guardado, clase){
     let random1=Math.trunc((Math.random()*40)+1); 
@@ -70,24 +70,57 @@ function mezclar(jugador, guardado, clase){
     function randomizar(varRandom){
         for(let i=0; i<copiaCartas.length; i++){
             if(copiaCartas[i].id===varRandom){
-                guardado.push(copiaCartas[i].numero); //puedo guardar el objeto directamente asi no tengo datos dispersos o entremezclados
-                guardado.push(copiaCartas[i].palo);
+                guardado.push(copiaCartas[i]); //puedo guardar el objeto directamente asi no tengo datos dispersos o entremezclados
                 jugador.push(copiaCartas[i].numero+' '+copiaCartas[i].palo);
             }
         }
     }
 
   	randomizar(random1);
-    document.getElementsByClassName(clase)[0].value= jugador[0]
+    document.getElementsByClassName(clase)[0].innerText= jugador[0];
   	randomizar(random2);
-    document.getElementsByClassName(clase)[1].value= jugador[1]								
-  	randomizar(random3);
-    document.getElementsByClassName(clase)[2].value= jugador[2]
+    document.getElementsByClassName(clase)[1].innerText= jugador[1];	
+    randomizar(random3);
+    document.getElementsByClassName(clase)[2].innerText= jugador[2]
 
     
 } 
 mezclar(manoJugador1, guardarJugador1, 'cartaJugador-1');
 mezclar(manoJugador2, guardarJugador2, 'cartaJugador-2');
+
+function jugar(){
+    
+    let jugar= document.querySelectorAll('.cartaJugador-1');
+    let i=1;
+
+    jugar.forEach(element => {
+
+        element.addEventListener('click', (e)=>{
+            
+            function mostrarCartas(clase, mano, id){
+                let evento= e.target.classList.contains(clase);
+                
+                if(evento){
+                    //let sacar= manoJugador1.pop();
+                    let sacar= document.getElementById(clase).innerHTML;
+                    mesaVer.push(sacar);
+                    console.log('funciona')
+                    document.getElementById(clase).classList.add("false");
+                    document.getElementById(clase).classList.remove("true");
+                    document.getElementById(id).innerText= mesaVer[mano];
+                    
+                } 
+            }
+            
+            mostrarCartas('carta'+i, 0, 'mesa'+i);
+            i++;
+            
+        });
+        
+    });
+}
+
+jugar()
 
 
 // function truco(turno, manoJugador){
