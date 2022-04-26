@@ -88,9 +88,9 @@ function mezclar(jugador, guardado, clase){
 mezclar(manoJugador1, guardarJugador1, 'cartaJugador-1');
 mezclar(manoJugador2, guardarJugador2, 'cartaJugador-2');
 
-function jugar(){
+function jugar(clases){
     
-    let jugar= document.querySelectorAll('.cartaJugador-1');
+    let jugar= document.querySelectorAll(clases);
     let i=1;
 
     jugar.forEach(element => {
@@ -112,15 +112,22 @@ function jugar(){
                 } 
             }
             
-            mostrarCartas('carta'+i, 0, 'mesa'+i);
+            mostrarCartas('carta'+i, 0, 'mesa1');
+            mostrarCartas('carte'+i, 1, 'mesa2');
             i++;
+            mostrarCartas('carta'+i, 0, 'mesa1');
+            mostrarCartas('carte'+i, 1, 'mesa2');
+            i++;
+            mostrarCartas('carta'+i, 0, 'mesa1');
+            mostrarCartas('carte'+i, 1, 'mesa2');
             
         });
         
     });
 }
 
-jugar()
+jugar('.cartaJugador-1');
+jugar('.cartaJugador-2');
 
 
 // function truco(turno, manoJugador){
