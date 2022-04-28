@@ -101,7 +101,7 @@ function jugar(clases){
                 let evento= e.target.classList.contains(clase);
                 
                 if(evento){
-                    //let sacar= manoJugador1.pop();
+                    // let sacar= manoJugador1.pop();
                     let sacar= document.getElementById(clase).innerHTML;
                     mesaVer.push(sacar);
                     console.log('funciona')
@@ -112,22 +112,25 @@ function jugar(clases){
                 } 
             }
             
-            mostrarCartas('carta'+i, 0, 'mesa1');
-            mostrarCartas('carte'+i, 1, 'mesa2');
-            i++;
-            mostrarCartas('carta'+i, 0, 'mesa1');
-            mostrarCartas('carte'+i, 1, 'mesa2');
-            i++;
-            mostrarCartas('carta'+i, 0, 'mesa1');
-            mostrarCartas('carte'+i, 1, 'mesa2');
+            mostrarCartas('carta1', 0, 'mesa1');
+            mostrarCartas('carte1', 1, 'mesa2');
+            
+            mostrarCartas('carta2', 0, 'mesa1');
+            mostrarCartas('carte2', 1, 'mesa2');
+            
+            mostrarCartas('carta3', 0, 'mesa1');
+            mostrarCartas('carte3', 1, 'mesa2');
             
         });
         
     });
+    console.log(mesaVer);
 }
 
 jugar('.cartaJugador-1');
 jugar('.cartaJugador-2');
+
+
 
 
 // function truco(turno, manoJugador){
