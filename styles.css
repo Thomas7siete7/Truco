@@ -9,7 +9,7 @@ html{
 }
 
 .manoJugador{
-    height: 40rem;
+    height: 10rem;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -23,8 +23,23 @@ html{
 }
 
 .carta{
-    width: 20rem;
+    width: 15rem;
     height: 25rem;
+    border: 0.2rem solid black;
+}
+
+.mesa{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    height: 40rem;
+}
+
+.cartaMesa{
+    width: 10rem;
+    height: 20rem;
+    border: 0.2rem solid black;
+
 }
 
 .canticos{
@@ -35,7 +50,12 @@ html{
     margin-top: -30rem;
     margin-left: 130rem;
 }
+
 .cantos{
     width: 5rem;
     height: 5rem;
+}
+
+.false{
+    display: none;
 }

@@ -54,82 +54,85 @@ let manoJugador2= []; //Informacion para el usuario
 let guardarJugador1=[]; //Informacion para la logica
 let guardarJugador2= []; //Informacion para la logica
 let mesaValor=[]; //Informacion para ver resultado
-let mesaVer=[];
+let mesaVer2=[];
+let mesaVer1=[];
 
-function mezclar(jugador, guardado, clase){
-    let random1=Math.trunc((Math.random()*40)+1); 
-    let random2=Math.trunc((Math.random()*40)+1);
-    let random3=Math.trunc((Math.random()*40)+1);
+if(puntos[0]!=30 || puntos[1]!=30){
 
-    if(random1==random2 || random1==random3){ //ver como solucionar el problema de numero 40
-        random1+=1;
-    }else if(random2==random3){
-        random2+=1;
-    }
-   
-    function randomizar(varRandom){
-        for(let i=0; i<copiaCartas.length; i++){
-            if(copiaCartas[i].id===varRandom){
-                guardado.push(copiaCartas[i]); //puedo guardar el objeto directamente asi no tengo datos dispersos o entremezclados
-                jugador.push(copiaCartas[i].numero+' '+copiaCartas[i].palo);
+    function mezclar(jugador, guardado, clase){
+        let random1=Math.trunc((Math.random()*40)+1); 
+        let random2=Math.trunc((Math.random()*40)+1);
+        let random3=Math.trunc((Math.random()*40)+1);
+
+        if(random1==random2 || random1==random3){ //ver como solucionar el problema de numero 40
+            random1+=1;
+        }else if(random2==random3){
+            random2+=1;
+        }
+    
+        function randomizar(varRandom){
+            for(let i=0; i<copiaCartas.length; i++){
+                if(copiaCartas[i].id===varRandom){
+                    guardado.push(copiaCartas[i]); //puedo guardar el objeto directamente asi no tengo datos dispersos o entremezclados
+                    jugador.push(copiaCartas[i].numero+' '+copiaCartas[i].palo);
+                }
             }
         }
-    }
 
-  	randomizar(random1);
-    document.getElementsByClassName(clase)[0].innerText= jugador[0];
-  	randomizar(random2);
-    document.getElementsByClassName(clase)[1].innerText= jugador[1];	
-    randomizar(random3);
-    document.getElementsByClassName(clase)[2].innerText= jugador[2]
+        randomizar(random1);
+        document.getElementsByClassName(clase)[0].innerText= jugador[0];
+        randomizar(random2);
+        document.getElementsByClassName(clase)[1].innerText= jugador[1];	
+        randomizar(random3);
+        document.getElementsByClassName(clase)[2].innerText= jugador[2]
 
-    
-} 
-mezclar(manoJugador1, guardarJugador1, 'cartaJugador-1');
-mezclar(manoJugador2, guardarJugador2, 'cartaJugador-2');
+        
+    } 
+    mezclar(manoJugador1, guardarJugador1, 'cartaJugador-1');
+    mezclar(manoJugador2, guardarJugador2, 'cartaJugador-2');
 
-function jugar(clases){
-    
-    let jugar= document.querySelectorAll(clases);
-    let i=1;
+    function jugar(clases){
+        
+        let jugar= document.querySelectorAll(clases);
 
-    jugar.forEach(element => {
+        jugar.forEach(element => {
 
-        element.addEventListener('click', (e)=>{
-            
-            function mostrarCartas(clase, mano, id){
-                let evento= e.target.classList.contains(clase);
+            element.addEventListener('click', (e)=>{
                 
-                if(evento){
-                    // let sacar= manoJugador1.pop();
-                    let sacar= document.getElementById(clase).innerHTML;
-                    mesaVer.push(sacar);
-                    console.log('funciona')
-                    document.getElementById(clase).classList.add("false");
-                    document.getElementById(clase).classList.remove("true");
-                    document.getElementById(id).innerText= mesaVer[mano];
+                function mostrarCartas(clase, id, lugar){
+                    let evento= e.target.classList.contains(clase);
                     
-                } 
-            }
-            
-            mostrarCartas('carta1', 0, 'mesa1');
-            mostrarCartas('carte1', 1, 'mesa2');
-            
-            mostrarCartas('carta2', 0, 'mesa1');
-            mostrarCartas('carte2', 1, 'mesa2');
-            
-            mostrarCartas('carta3', 0, 'mesa1');
-            mostrarCartas('carte3', 1, 'mesa2');
-            
+                    if(evento){
+                        // let sacar= manoJugador1.pop();
+                        let sacar= document.getElementById(clase).innerHTML;
+                        lugar.push(sacar);
+                        console.log('funciona')
+                        document.getElementById(clase).classList.add("false");
+                        document.getElementById(clase).classList.remove("true");
+                        document.getElementById(id).innerText= lugar[0];
+                    } 
+                }
+                
+                mostrarCartas('carte1', 'mesa2', mesaVer2);
+                mostrarCartas('carte2', 'mesa2', mesaVer2);
+                mostrarCartas('carte3', 'mesa2', mesaVer2);
+                mostrarCartas('carta1', 'mesa1', mesaVer1);
+                mostrarCartas('carta2', 'mesa1', mesaVer1);
+                mostrarCartas('carta3', 'mesa1', mesaVer1);
+
+
+            });
         });
         
-    });
-    console.log(mesaVer);
+    }
+
+    jugar('.cartaJugador-2');
+    jugar('.cartaJugador-1');
+
+    
+
 }
-
-jugar('.cartaJugador-1');
-jugar('.cartaJugador-2');
-
+    
 
 
 
