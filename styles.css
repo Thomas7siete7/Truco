@@ -1,11 +1,19 @@
+
+body{
+    background-color: #5D432C;
+}
+
 /* 1REM=10PX */
 html{
-	font-size: 62.5%
+	font-size: 62.5%;
+    
 }
 
 .main{
     width: 95%;
     height: 80rem;
+    z-index: 0;
+    
 }
 
 .manoJugador{
@@ -15,7 +23,7 @@ html{
     align-content: center;
     column-gap: 5rem;
     margin-top: 5rem;
-    z-index: 0;
+    
 }
 
 .mj_fix{
@@ -26,6 +34,7 @@ html{
     width: 15rem;
     height: 25rem;
     border: 0.2rem solid black;
+    background-color: aliceblue;
 }
 
 .mesa{
@@ -39,11 +48,11 @@ html{
     width: 10rem;
     height: 20rem;
     border: 0.2rem solid black;
+    background-color: aliceblue;
 
 }
 
 .canticos{
-    z-index: 1;
     width: 10rem;
     display: flex;
     justify-content: flex-end;
@@ -56,6 +65,55 @@ html{
     height: 5rem;
 }
 
-.false{
+.ganar{
+    width: 100%;
+    height: 50rem;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: yellow;
+}
+
+.ganador{
+    font-size: 8rem;
+}
+
+.falso{
     display: none;
+}
+
+form{
+    height: 85rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #B9935A;
+}
+
+.datos{
+    font-size: 3rem;
+}
+
+.form-check-label{
+    font-size: 1.5rem;
+}
+.form-text{
+    font-size: 1.3rem;
+}
+
+.boton{
+    width: 10rem;
+    height: 2.5rem;
+}
+
+.saludo{
+    background-color: #7D3F32;
+    width: 30rem;
+    border-radius: 0 0 2rem 2rem;
+}
+
+.saludar{
+    color: aliceblue;
+    font-size: 2rem;
 }

@@ -111,8 +111,9 @@ if(puntos[0]!=30 || puntos[1]!=30){
                         lugar.push(sacar);
                         
                         console.log('funciona')
-                        document.getElementById(clase).classList.add("false");
+                        document.getElementById(clase).classList.add("falso");
                         document.getElementById(clase).classList.remove("true");
+                        document.getElementById(id).classList.remove("falso");
                         document.getElementById(id).innerText= lugar[0];
                         let valor2= mesaVer2.toString().split(' ');
                         let valor1= mesaVer1.toString().split(' ');
@@ -133,14 +134,30 @@ if(puntos[0]!=30 || puntos[1]!=30){
 
                         if((mesaValor[0]!=false) && (mesaValor[1]!=undefined)){
                             if(mesaValor[0]>mesaValor[1]){
-                                let ganador= document.getElementById('ganar');
-                                ganador.classList.remove('false');
+                                let noMostrar= document.getElementById('main');
+                                noMostrar.classList.remove('true');
+                                noMostrar.classList.add('falso');
+                                let ganar= document.getElementById('ganar');
+                                ganar.classList.remove('falso');
+                                let ganador= document.getElementById('ganador');
                                 ganador.innerText= 'Ha ganado el jugador 1';
 
-                            }else{
-                                let ganador= document.getElementById('ganar');
-                                ganador.classList.remove('false');
+                            }else if(mesaValor[0]<mesaValor[1]){
+                                let noMostrar= document.getElementById('main');
+                                noMostrar.classList.remove('true');
+                                noMostrar.classList.add('falso');
+                                let ganar= document.getElementById('ganar');
+                                ganar.classList.remove('falso');
+                                let ganador= document.getElementById('ganador');
                                 ganador.innerText= 'Ha ganado el jugador 2';
+                            }else{
+                                let noMostrar= document.getElementById('main');
+                                noMostrar.classList.remove('true');
+                                noMostrar.classList.add('falso');
+                                let ganar= document.getElementById('ganar');
+                                ganar.classList.remove('falso');
+                                let ganador= document.getElementById('ganador');
+                                ganador.innerText= 'Se ha hecho PARDA!';
                             }
                         }
                         
@@ -165,43 +182,14 @@ if(puntos[0]!=30 || puntos[1]!=30){
     
 }
 
-    
-
-
-
-// function truco(turno, manoJugador){
-//     let pregunta1=prompt(`Las cartas del jugador ${turno}: son ${manoJugador} ¿Qué desea hacer? ¿Cantar envido, truco, o callado?`);
-
-//     //#region turno1
-//     if(pregunta1== 'Callado' ||pregunta1== 'callado' || pregunta1== 'truco' || pregunta1== 'Truco'){
-//         let numeroJugada1= parseInt(prompt (`Qué carta desea jugar? Coloque SOLO el NUMERO. "Recuerde: ${manoJugador}"`));
-//         let paloJugada1= prompt(`Ahora coloque SOLO el PALO. "Recuerde: ${manoJugador}"`);
-//         for(let i=0; i<copiaCartas.length;i++){
-//             if(copiaCartas[i].numero==numeroJugada1 && copiaCartas[i].palo==paloJugada1){
-//                 mesa.push(copiaCartas[i].valor);
-                    
-//             }
-//         }
-//     }else if(pregunta1== 'envido' || pregunta1== 'Envido'){
-//         alert('Aún no tenemos disponible esa opcion! Pronto lo haremos.');
-//         truco(turno, manoJugador);
-//     }else{
-//         alert('Opcion incorrecta');
-//         truco(turno, manoJugador);
-//     }
-    
-    
-//     //#endregion
-// }
-
-// truco(1, manoJugador1);
-// alert('Turno jugador2');
-// truco(2, manoJugador2);
-
-// if(mesa[0]<mesa[1]){
-//     alert('jugador2 ha ganado!!!!!!!');
-//     puntos[1]+=1
-// }else{
-//     alert('jugador1 ha ganado!!!!!!!');
-//     puntos[0]+=1;
-// }
+if(localStorage.length==0){
+    let saludo= document.getElementById('saludo');
+    saludo.classList.remove('falso');
+    let saludar= document.getElementById('saludar');
+    saludar.innerText= 'Logeate!!!!!!';
+}else{
+    let saludo= document.getElementById('saludo');
+    saludo.classList.remove('falso');
+    let saludar= document.getElementById('saludar');
+    saludar.innerText= 'Bienvenido de vuelta!!!!!!';
+}
