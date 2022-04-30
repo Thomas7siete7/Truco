@@ -141,6 +141,7 @@ if(puntos[0]!=30 || puntos[1]!=30){
                                 ganar.classList.remove('falso');
                                 let ganador= document.getElementById('ganador');
                                 ganador.innerText= 'Ha ganado el jugador 1';
+                                
 
                             }else if(mesaValor[0]<mesaValor[1]){
                                 let noMostrar= document.getElementById('main');
@@ -182,14 +183,25 @@ if(puntos[0]!=30 || puntos[1]!=30){
     
 }
 
+const toast= e=>{
+    toast.error('Loageate amigo!');
+    toast.success('Bienvenido de nuevo loco!!');
+}
+
 if(localStorage.length==0){
-    let saludo= document.getElementById('saludo');
-    saludo.classList.remove('falso');
-    let saludar= document.getElementById('saludar');
-    saludar.innerText= 'Logeate!!!!!!';
+    Toastify({
+        text: 'Loageate amigo!',
+        duration: 2500,
+        position: 'right',
+        gravity: 'top',
+        className: 'arreglosNo'
+    }).showToast();
 }else{
-    let saludo= document.getElementById('saludo');
-    saludo.classList.remove('falso');
-    let saludar= document.getElementById('saludar');
-    saludar.innerText= 'Bienvenido de vuelta!!!!!!';
+    Toastify({
+        text: 'Bienvenido de nuevo loco!!',
+        duration: 2500,
+        position: 'right',
+        gravity: 'top',
+        className: 'arreglosSi'
+    }).showToast();
 }

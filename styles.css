@@ -16,6 +16,10 @@ html{
     
 }
 
+.color{
+    font-size: 3rem;
+}
+
 .manoJugador{
     height: 10rem;
     display: flex;
@@ -79,10 +83,6 @@ html{
     font-size: 8rem;
 }
 
-.falso{
-    display: none;
-}
-
 form{
     height: 85rem;
     display: flex;
@@ -116,4 +116,26 @@ form{
 .saludar{
     color: aliceblue;
     font-size: 2rem;
+}
+
+.arreglosNo{
+    font-size: 2rem;
+    background-color: #d16d32;
+}
+
+.arreglosSi{
+    font-size: 2rem;
+    background-color: #324fd1;
+}
+
+.img-l{
+    margin-right: 20rem;
+}
+
+.img-r{
+    margin-left: 15rem;
+}
+
+.falso{
+    display: none;
 }
