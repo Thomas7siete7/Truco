@@ -130,11 +130,20 @@ if(puntos[0]!=30 || puntos[1]!=30){
                                 }
                             }
                         }
-                        if(mesaValor[0]>mesaValor[1]){
-                            alert('jugador1 ha ganado')
-                        }else{
-                            alert('jugador2 ha ganado')
+
+                        if((mesaValor[0]!=false) && (mesaValor[1]!=undefined)){
+                            if(mesaValor[0]>mesaValor[1]){
+                                let ganador= document.getElementById('ganar');
+                                ganador.classList.remove('false');
+                                ganador.innerText= 'Ha ganado el jugador 1';
+
+                            }else{
+                                let ganador= document.getElementById('ganar');
+                                ganador.classList.remove('false');
+                                ganador.innerText= 'Ha ganado el jugador 2';
+                            }
                         }
+                        
                     } 
                 }
                 
