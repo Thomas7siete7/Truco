@@ -48,140 +48,163 @@ const cartas= [
 // alert(`Hola  bienvenido a Truco online. Espero que tengas un agradable juego y logres ganar.`);
 
 let copiaCartas=[...cartas];
-let puntos=[ [] , [] ];
+let puntos1=0;
+let puntos2=0;
 let manoJugador1=[]; //Informacion para el usuario
 let manoJugador2= []; //Informacion para el usuario
 let guardarJugador1=[]; //Informacion para la logica
 let guardarJugador2= []; //Informacion para la logica
-let mesaValor=[]; //Informacion para ver resultado
+let mesaValor=[[],[]]; //Informacion para ver resultado
 let mesaVer2=[];
 let mesaVer1=[];
+let trucoTrue= false;
+let envidoTrue= false;
+
+let cantarTruco= document.getElementById('truco');
+cantarTruco.addEventListener('click', (e)=>{
+    trucoTrue=true;
+    alert('truco');
+});
+let envido= document.getElementById('envido');
+envido.addEventListener('click', (e)=>{
+    envidoTrue=true;
+    alert('envido');
+});
 
 
 
 
-if(puntos[0]!=30 || puntos[1]!=30){
 
-    function mezclar(jugador, guardado, clase){
-        let random1=Math.trunc((Math.random()*40)+1); 
-        let random2=Math.trunc((Math.random()*40)+1);
-        let random3=Math.trunc((Math.random()*40)+1);
+function mezclar(jugador, guardado, clase){
+let random1=Math.trunc((Math.random()*40)+1); 
+let random2=Math.trunc((Math.random()*40)+1);
+let random3=Math.trunc((Math.random()*40)+1);
 
-        if(random1==random2 || random1==random3){ //ver como solucionar el problema de numero 40
-            random1+=1;
-        }else if(random2==random3){
-            random2+=1;
+if(random1==random2 || random1==random3){ //ver como solucionar el problema de numero 40
+    random1+=1;
+}else if(random2==random3){
+    random2+=1;
+}
+
+function randomizar(varRandom){
+    for(let i=0; i<copiaCartas.length; i++){
+        if(copiaCartas[i].id===varRandom){
+            guardado.push(copiaCartas[i]); //puedo guardar el objeto directamente asi no tengo datos dispersos o entremezclados
+            jugador.push(copiaCartas[i].numero+' '+copiaCartas[i].palo);
         }
-    
-        function randomizar(varRandom){
-            for(let i=0; i<copiaCartas.length; i++){
-                if(copiaCartas[i].id===varRandom){
-                    guardado.push(copiaCartas[i]); //puedo guardar el objeto directamente asi no tengo datos dispersos o entremezclados
-                    jugador.push(copiaCartas[i].numero+' '+copiaCartas[i].palo);
-                }
-            }
-        }
-
-        randomizar(random1);
-        document.getElementsByClassName(clase)[0].innerText= jugador[0];
-        randomizar(random2);
-        document.getElementsByClassName(clase)[1].innerText= jugador[1];	
-        randomizar(random3);
-        document.getElementsByClassName(clase)[2].innerText= jugador[2]
-
-        
-    } 
-    mezclar(manoJugador1, guardarJugador1, 'cartaJugador-1');
-    mezclar(manoJugador2, guardarJugador2, 'cartaJugador-2');
-
-    function jugar(clases){
-        
-        let jugar= document.querySelectorAll(clases);
-
-        jugar.forEach(element => {
-
-            element.addEventListener('click', (e)=>{
-                
-                function mostrarCartas(clase, id, lugar){
-                    let evento= e.target.classList.contains(clase);
-                    
-                    if(evento){
-                        // let sacar= manoJugador1.pop();
-                        let sacar= document.getElementById(clase).innerHTML;
-                        lugar.push(sacar);
-                        
-                        console.log('funciona')
-                        document.getElementById(clase).classList.add("falso");
-                        document.getElementById(clase).classList.remove("true");
-                        document.getElementById(id).classList.remove("falso");
-                        document.getElementById(id).innerText= lugar[0];
-                        let valor2= mesaVer2.toString().split(' ');
-                        let valor1= mesaVer1.toString().split(' ');
-                        
-                        if(id=='mesa1'){
-                            for(let i=0; i<copiaCartas.length; i++){
-                                if(valor1[0]==copiaCartas[i].numero && valor1[1]==copiaCartas[i].palo ){
-                                mesaValor.push(copiaCartas[i].valor);
-                                }
-                            }
-                        }else{
-                            for(let i=0; i<copiaCartas.length; i++){
-                                if(valor2[0]==copiaCartas[i].numero && valor2[1]==copiaCartas[i].palo){
-                                mesaValor.push(copiaCartas[i].valor);
-                                }
-                            }
-                        }
-
-                        if((mesaValor[0]!=false) && (mesaValor[1]!=undefined)){
-                            if(mesaValor[0]>mesaValor[1]){
-                                let noMostrar= document.getElementById('main');
-                                noMostrar.classList.remove('true');
-                                noMostrar.classList.add('falso');
-                                let ganar= document.getElementById('ganar');
-                                ganar.classList.remove('falso');
-                                let ganador= document.getElementById('ganador');
-                                ganador.innerText= 'Ha ganado el jugador 1';
-                                
-
-                            }else if(mesaValor[0]<mesaValor[1]){
-                                let noMostrar= document.getElementById('main');
-                                noMostrar.classList.remove('true');
-                                noMostrar.classList.add('falso');
-                                let ganar= document.getElementById('ganar');
-                                ganar.classList.remove('falso');
-                                let ganador= document.getElementById('ganador');
-                                ganador.innerText= 'Ha ganado el jugador 2';
-                            }else{
-                                let noMostrar= document.getElementById('main');
-                                noMostrar.classList.remove('true');
-                                noMostrar.classList.add('falso');
-                                let ganar= document.getElementById('ganar');
-                                ganar.classList.remove('falso');
-                                let ganador= document.getElementById('ganador');
-                                ganador.innerText= 'Se ha hecho PARDA!';
-                            }
-                        }
-                        
-                    } 
-                }
-                
-                mostrarCartas('carte1', 'mesa2', mesaVer2);
-                mostrarCartas('carte2', 'mesa2', mesaVer2);
-                mostrarCartas('carte3', 'mesa2', mesaVer2);
-                mostrarCartas('carta1', 'mesa1', mesaVer1);
-                mostrarCartas('carta2', 'mesa1', mesaVer1);
-                mostrarCartas('carta3', 'mesa1', mesaVer1);
-
-                
-            });
-        });
-        
     }
-    jugar('.cartaJugador-2');
-    jugar('.cartaJugador-1');
-    
+}
+
+randomizar(random1);
+document.getElementsByClassName(clase)[0].innerText= jugador[0];
+randomizar(random2);
+document.getElementsByClassName(clase)[1].innerText= jugador[1];	
+randomizar(random3);
+document.getElementsByClassName(clase)[2].innerText= jugador[2]
+
+
+} 
+
+mezclar(manoJugador1, guardarJugador1, 'cartaJugador-1');
+mezclar(manoJugador2, guardarJugador2, 'cartaJugador-2');
+
+
+function jugar(clases){
+
+    let tocarCarta= document.querySelectorAll(clases);
+
+    tocarCarta.forEach(element => {
+
+        element.addEventListener('dblclick', (e)=>{
+            
+            function mostrarCartas(clase, id, lugar, puntos){
+                let evento= e.target.classList.contains(clase);
+                
+                if(evento){
+                    // let sacar= manoJugador1.pop();
+                    let sacar= document.getElementById(clase).innerHTML;
+                    lugar.push(sacar);
+                    
+                    console.log('funciona')
+                    document.getElementById(clase).classList.add("falso");
+                    document.getElementById(clase).classList.remove("true");
+                    document.getElementById(id).classList.remove("falso");
+                    document.getElementById(id).innerText= lugar[0];
+                    let valor2= mesaVer2.toString().split(' ');
+                    let valor1= mesaVer1.toString().split(' ');
+                    
+                    if(id=='mesa1'){
+                        for(let i=0; i<copiaCartas.length; i++){
+                            if(valor1[0]==copiaCartas[i].numero && valor1[1]==copiaCartas[i].palo ){
+                            mesaValor[0].push(copiaCartas[i].valor);
+                            }
+
+
+                            
+                        }
+                    }else{
+                        for(let i=0; i<copiaCartas.length; i++){
+                            if(valor2[0]==copiaCartas[i].numero && valor2[1]==copiaCartas[i].palo){
+                            mesaValor[1].push(copiaCartas[i].valor);
+                            }
+                        }
+                    }
+                
+
+                    
+
+                    if((mesaValor[0]!=false) && (mesaValor[1]!=undefined)){
+                        if(mesaValor[0]>mesaValor[1]){
+                            if(trucoTrue==true){
+                                puntos1+=2;
+                            }else{
+                                puntos1++;
+                            }
+                            // let noMostrar= document.getElementById('main');
+                            // noMostrar.classList.remove('true');
+                            // noMostrar.classList.add('falso');
+                            // let ganar= document.getElementById('ganar');
+                            // ganar.classList.remove('falso');
+                            // let ganador= document.getElementById('ganador');
+                            // ganador.innerText= 'Ha ganado el jugador 1';
+                        }else if(mesaValor[0]<mesaValor[1]){
+                            if(trucoTrue==true){
+                                puntos+=2;
+                            }else{
+                                puntos++;
+                            }
+                            // let ganar= document.getElementById('ganar');
+                            // ganar.classList.remove('falso');
+                            // let ganador= document.getElementById('ganador');
+                            // ganador.innerText= 'Ha ganado el jugador 2';
+                        }else{
+                            let noMostrar= document.getElementById('main');
+                            noMostrar.classList.remove('true');
+                            noMostrar.classList.add('falso');
+                            let ganar= document.getElementById('ganar');
+                            ganar.classList.remove('falso');
+                            let ganador= document.getElementById('ganador');
+                            ganador.innerText= 'Se ha hecho PARDA!';
+                        }
+                    }
+                    
+                } 
+            }
+            
+            mostrarCartas('carte1', 'mesa2', mesaVer2, puntos2 );
+            mostrarCartas('carte2', 'mesa2', mesaVer2, puntos2 );
+            mostrarCartas('carte3', 'mesa2', mesaVer2, puntos2 );
+            mostrarCartas('carta1', 'mesa1', mesaVer1, puntos1 );
+            mostrarCartas('carta2', 'mesa1', mesaVer1, puntos1 );
+            mostrarCartas('carta3', 'mesa1', mesaVer1, puntos1 );
+
+            
+        });
+    });
     
 }
+jugar('.cartaJugador-2');
+jugar('.cartaJugador-1');
 
 const toast= e=>{
     toast.error('Loageate amigo!');
@@ -205,3 +228,5 @@ if(localStorage.length==0){
         className: 'arreglosSi'
     }).showToast();
 }
+
+
