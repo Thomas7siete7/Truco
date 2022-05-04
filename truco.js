@@ -117,11 +117,10 @@ function jugar(clases){
 
         element.addEventListener('dblclick', (e)=>{
             
-            function mostrarCartas(clase, id, lugar, puntos){
+            function mostrarCartas(clase, id, lugar){
                 let evento= e.target.classList.contains(clase);
                 
                 if(evento){
-                    // let sacar= manoJugador1.pop();
                     let sacar= document.getElementById(clase).innerHTML;
                     lugar.push(sacar);
                     
@@ -154,29 +153,33 @@ function jugar(clases){
                     
 
                     if((mesaValor[0]!=false) && (mesaValor[1]!=undefined)){
+                        let muestra1= document.getElementById('puntos-1');
+                        let muestra2= document.getElementById('puntos-2');
                         if(mesaValor[0]>mesaValor[1]){
                             if(trucoTrue==true){
                                 puntos1+=2;
+                                muestra1.innerText= puntos1;
+                                muestra2.innerText= puntos2;
                             }else{
                                 puntos1++;
+                                
+                                muestra1.innerText= puntos1;
+                                muestra2.innerText= puntos2;
                             }
-                            // let noMostrar= document.getElementById('main');
-                            // noMostrar.classList.remove('true');
-                            // noMostrar.classList.add('falso');
-                            // let ganar= document.getElementById('ganar');
-                            // ganar.classList.remove('falso');
-                            // let ganador= document.getElementById('ganador');
-                            // ganador.innerText= 'Ha ganado el jugador 1';
+                            
                         }else if(mesaValor[0]<mesaValor[1]){
                             if(trucoTrue==true){
-                                puntos+=2;
+                                puntos2+=2;
+
+                                muestra1.innerText= puntos1;
+                                muestra2.innerText= puntos2;
                             }else{
-                                puntos++;
+                                puntos2++;
+
+                                muestra1.innerText= puntos1;
+                                muestra2.innerText= puntos2;
                             }
-                            // let ganar= document.getElementById('ganar');
-                            // ganar.classList.remove('falso');
-                            // let ganador= document.getElementById('ganador');
-                            // ganador.innerText= 'Ha ganado el jugador 2';
+                            
                         }else{
                             let noMostrar= document.getElementById('main');
                             noMostrar.classList.remove('true');
@@ -191,12 +194,12 @@ function jugar(clases){
                 } 
             }
             
-            mostrarCartas('carte1', 'mesa2', mesaVer2, puntos2 );
-            mostrarCartas('carte2', 'mesa2', mesaVer2, puntos2 );
-            mostrarCartas('carte3', 'mesa2', mesaVer2, puntos2 );
-            mostrarCartas('carta1', 'mesa1', mesaVer1, puntos1 );
-            mostrarCartas('carta2', 'mesa1', mesaVer1, puntos1 );
-            mostrarCartas('carta3', 'mesa1', mesaVer1, puntos1 );
+            mostrarCartas('carte1', 'mesa2', mesaVer2 );
+            mostrarCartas('carte2', 'mesa2', mesaVer2 );
+            mostrarCartas('carte3', 'mesa2', mesaVer2 );
+            mostrarCartas('carta1', 'mesa1', mesaVer1 );
+            mostrarCartas('carta2', 'mesa1', mesaVer1 );
+            mostrarCartas('carta3', 'mesa1', mesaVer1 );
 
             
         });
@@ -228,5 +231,6 @@ if(localStorage.length==0){
         className: 'arreglosSi'
     }).showToast();
 }
+
 
 

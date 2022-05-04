@@ -1,12 +1,37 @@
 
 body{
     background-color: #5D432C;
+    min-height: 100%;
 }
 
 /* 1REM=10PX */
 html{
 	font-size: 62.5%;
     
+}
+
+.header{
+    grid-area: header;
+}
+
+.nav{
+    grid-area: nav;
+}
+
+.main{
+    grid-area: main;
+}
+
+.sidebar{
+    grid-area: sidebar;
+}
+
+.grid{
+    display: grid;
+    grid-template-areas: 
+    "header header"
+    "nav nav"
+    "main sidebar"
 }
 
 .main{
@@ -57,11 +82,10 @@ html{
 }
 
 .canticos{
-    width: 10rem;
+    width: 100%;
     display: flex;
     justify-content: flex-end;
-    margin-top: -30rem;
-    margin-left: 130rem;
+    
 }
 
 .cantos{
@@ -134,6 +158,19 @@ form{
 
 .img-r{
     margin-left: 15rem;
+}
+
+.puntos{
+    height: 50rem;
+    width: 10rem;
+    display: flex;
+    justify-content: space-around;
+    gap: 5rem;
+    background-color: antiquewhite;
+}
+
+.puntos-jugador{
+    font-size: 2rem;
 }
 
 .falso{
