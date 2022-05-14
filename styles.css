@@ -38,7 +38,6 @@ html{
     width: 95%;
     height: 80rem;
     z-index: 0;
-    
 }
 
 .color{
@@ -62,6 +61,8 @@ html{
 .carta{
     width: 15rem;
     height: 25rem;
+    font-size: 3rem;
+    
     border: 0.2rem solid black;
     background-color: aliceblue;
 }
