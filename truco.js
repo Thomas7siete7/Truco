@@ -54,7 +54,8 @@ let manoJugador1=[]; //Informacion para el usuario
 let manoJugador2= []; //Informacion para el usuario
 let guardarJugador1=[]; //Informacion para la logica
 let guardarJugador2= []; //Informacion para la logica
-let mesaValor=[[],[]]; //Informacion para ver resultado
+let mesaValor=[]; //Informacion para ver resultado
+let mesaEnvido=[];
 let mesaVer2=[];
 let mesaVer1=[];
 let trucoTrue= false;
@@ -68,9 +69,13 @@ cantarTruco.addEventListener('click', (e)=>{
 let envido= document.getElementById('envido');
 envido.addEventListener('click', (e)=>{
     envidoTrue=true;
-    alert('envido');
+    if(envidoTrue==true){
+        if(guardarJugador1[0].palo==guardarJugador1[1].palo || guardarJugador1[0].palo==guardarJugador1[2].palo || guardarJugador1[1].palo==guardarJugador1[2].palo){
+            alert(guardarJugador1[0].tanto+guardarJugador1[1].tanto)
+        }
+    }
+    
 });
-
 
 
 
@@ -135,27 +140,22 @@ function jugar(clases){
                     if(id=='mesa1'){
                         for(let i=0; i<copiaCartas.length; i++){
                             if(valor1[0]==copiaCartas[i].numero && valor1[1]==copiaCartas[i].palo ){
-                            mesaValor[0].push(copiaCartas[i].valor);
-                            }
-
-
-                            
+                            mesaValor.push(copiaCartas[i].valor);
+                            }   
                         }
                     }else{
                         for(let i=0; i<copiaCartas.length; i++){
                             if(valor2[0]==copiaCartas[i].numero && valor2[1]==copiaCartas[i].palo){
-                            mesaValor[1].push(copiaCartas[i].valor);
+                            mesaValor.push(copiaCartas[i].valor);
                             }
                         }
                     }
-                
-
                     
 
-                    if((mesaValor[0]!=false) && (mesaValor[1]!=undefined)){
+                    if((mesaValor[0]!=false) && (mesaValor[1]!=false)){
                         let muestra1= document.getElementById('puntos-1');
                         let muestra2= document.getElementById('puntos-2');
-                        if(mesaValor[0]>mesaValor[1]){
+                        if(mesaValor[0]>mesaValor[1] && mesaValor[1]!=undefined){
                             if(trucoTrue==true){
                                 puntos1+=2;
                                 muestra1.innerText= puntos1;
@@ -180,14 +180,8 @@ function jugar(clases){
                                 muestra2.innerText= puntos2;
                             }
                             
-                        }else{
-                            let noMostrar= document.getElementById('main');
-                            noMostrar.classList.remove('true');
-                            noMostrar.classList.add('falso');
-                            let ganar= document.getElementById('ganar');
-                            ganar.classList.remove('falso');
-                            let ganador= document.getElementById('ganador');
-                            ganador.innerText= 'Se ha hecho PARDA!';
+                        }else if(mesaValor[0]==mesaValor[1]){
+                            alert('se ha hecho parda')
                         }
                     }
                     
