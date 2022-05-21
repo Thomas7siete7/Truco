@@ -45,8 +45,6 @@ const cartas= [
     {numero: 12, palo: 'copa', valor: 7, id:40, tanto: 0, imagen: 'img/copa_1.jpg'}
 ]
 
-// alert(`Hola  bienvenido a Truco online. Espero que tengas un agradable juego y logres ganar.`);
-
 let copiaCartas=[...cartas];
 let puntos1=0;
 let puntos2=0;
@@ -73,9 +71,10 @@ if(puntos1<30 || puntos2<30){
         trucoTrue=true;
         alert('truco');
     });
-    let envido= document.getElementById('envido');
-    envido.addEventListener('click', (e)=>{
+    let envidos= document.getElementById('envido');
+    envidos.addEventListener('click', (e)=>{
         envidoTrue=true;
+        envidos.classList.add('falso')
         function envido(jugador){
             if(envidoTrue==true){
             if(jugador[0].palo==jugador[1].palo && jugador[0].palo==jugador[2].palo && jugador[1].palo==jugador[2].palo){
@@ -103,6 +102,7 @@ if(puntos1<30 || puntos2<30){
                 mesaEnvido.push(0)
             }
             } 
+            
         }
         envido(guardarJugador1);
         envido(guardarJugador2);
@@ -197,6 +197,10 @@ if(puntos1<30 || puntos2<30){
                             }
                         }
                         
+                        if(mesaVer1==true && mesaVer2==true){
+                            mesaVer1.pop();
+                            mesaVer2.pop();
+                        }
 
                         if((mesaValor[0]!=false) && (mesaValor[1]!=false)){
                             
@@ -204,10 +208,10 @@ if(puntos1<30 || puntos2<30){
                                 trucoTrue? puntos1+=2: puntos1++;
                                 
                             }else if(mesaValor[0]<mesaValor[1]){
-                                trucoTrue? puntos2+=2: puntos2++
+                                trucoTrue? puntos2+=2: puntos2++;
                                 
                             }else if(mesaValor[0]==mesaValor[1]){
-                                alert('se ha hecho parda')
+                                Swal.fire('Se ha hecho parda')
                             }
                             muestra1.innerText= puntos1;
                             muestra2.innerText= puntos2;
@@ -267,21 +271,32 @@ if (puntos1==30){
     main.classList.add('falso');
 }
 
-let main= document.getElementById('main');
 
-fetch("jugadores.json")
-    .then((res)=>res.json())
-    .then((data)=>{
-        data.forEach((usuario)=>{
-            const li = document.createElement('li');
-            li.innerHTML= `
-                <h4>${usuario.nombre}: ${usuario.partidas}</h4>
-                <h4>${usuario.nombre}: ${usuario.partidas}</h4>
-                <h4>${usuario.nombre}: ${usuario.partidas}</h4>
-                <h4>${usuario.nombre}: ${usuario.partidas}</h4>
-                <h4>${usuario.nombre}: ${usuario.partidas}</h4>
+
+
+const marvel={
+    render:()=>{
+        const urlAPI='https://gateway.marvel.com:443/v1/public/characters?ts=1&apikey=c575ea06e415cc72f10cbaf8a25dbd52&hash=0f02b080d7d6aead9c8f62945f2e0a28';
+
+        let maini= document.getElementById('maini');
+        let content='';
+
+        fetch(urlAPI)
+        .then((response) => response.json())
+        .then((json) => {
+            for(const hero of json.data.results){
+                content+= `
                 
-            `;
-            main.append(li);
+                <div class="jugadores">
+                    <p> ${hero.name}</p>
+                </div>
+
+                `
+            }
+            maini.innerHTML=content;
         });
-    });
+    }
+}
+
+marvel.render();
+

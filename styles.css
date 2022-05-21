@@ -22,21 +22,26 @@ html{
     grid-area: main;
 }
 
-.sidebar{
-    grid-area: sidebar;
+.sidebar1{
+    grid-area: sidebar1;
+}
+
+.sidebar2{
+    grid-area: sidebar2;
 }
 
 .grid{
     display: grid;
     grid-template-areas: 
-    "header header"
-    "nav nav"
-    "main sidebar"
+    "header header header"
+    "nav nav nav"
+    "sidebar1 main sidebar2"
 }
 
 .main{
     width: 95%;
     height: 80rem;
+    margin-left: -20rem;
     z-index: 0;
 }
 
@@ -86,6 +91,7 @@ html{
     width: 100%;
     display: flex;
     justify-content: flex-end;
+    margin-left: 2rem;
     
 }
 
@@ -159,6 +165,22 @@ form{
 
 .img-r{
     margin-left: 15rem;
+}
+
+.sidebar1{
+    width: 20rem;
+}
+
+.ganadores{
+    margin-left: 2rem;
+    color: aliceblue;
+}
+
+.users{
+    height: 50rem;
+    width: 15rem;
+    margin-left: 2rem;
+    background-color: antiquewhite;
 }
 
 .puntos{
