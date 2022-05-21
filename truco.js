@@ -124,28 +124,34 @@ if(puntos1<30 || puntos2<30){
         let random1=Math.trunc((Math.random()*40)+1); 
         let random2=Math.trunc((Math.random()*40)+1);
         let random3=Math.trunc((Math.random()*40)+1);
+        do{
+            if((random1==random2 || random1==random3) && (random1>20 ||random1<=40)){ //ver como solucionar el problema de numero 40
+                random1--;
+            }else if((random2==random3) && (random2>20 ||random2<=40)){
+                random2--;
+            }else if((random1==random2 || random1==random3) && (random1>1 ||random1<=20)){
+                random1++;
+            }else{
+                random2++
+            }
+        }while(random1==random2 || random1==random3 || random3==random2);
+       
 
-        if(random1==random2 || random1==random3){ //ver como solucionar el problema de numero 40
-            random1+=1;
-        }else if(random2==random3){
-            random2+=1;
-    }
-
-    function randomizar(varRandom){
-        for(let i=0; i<copiaCartas.length; i++){
-            if(copiaCartas[i].id===varRandom){
-                guardado.push(copiaCartas[i]);
-                jugador.push(copiaCartas[i].numero+' '+copiaCartas[i].palo);
+        function randomizar(varRandom){
+            for(let i=0; i<copiaCartas.length; i++){
+                if(copiaCartas[i].id===varRandom){
+                    guardado.push(copiaCartas[i]);
+                    jugador.push(copiaCartas[i].numero+' '+copiaCartas[i].palo);
+                }
             }
         }
-    }
 
-    randomizar(random1);
-    document.getElementsByClassName(clase)[0].innerText= jugador[0];
-    randomizar(random2);
-    document.getElementsByClassName(clase)[1].innerText= jugador[1];	
-    randomizar(random3);
-    document.getElementsByClassName(clase)[2].innerText= jugador[2]
+        randomizar(random1);
+        document.getElementsByClassName(clase)[0].innerText= jugador[0];
+        randomizar(random2);
+        document.getElementsByClassName(clase)[1].innerText= jugador[1];	
+        randomizar(random3);
+        document.getElementsByClassName(clase)[2].innerText= jugador[2]
 
 
     } 
@@ -195,33 +201,16 @@ if(puntos1<30 || puntos2<30){
                         if((mesaValor[0]!=false) && (mesaValor[1]!=false)){
                             
                             if(mesaValor[0]>mesaValor[1] && mesaValor[1]!=undefined){
-                                if(trucoTrue==true){
-                                    puntos1+=2;
-                                    muestra1.innerText= puntos1;
-                                    muestra2.innerText= puntos2;
-                                }else{
-                                    puntos1++;
-                                    
-                                    muestra1.innerText= puntos1;
-                                    muestra2.innerText= puntos2;
-                                }
+                                trucoTrue? puntos1+=2: puntos1++;
                                 
                             }else if(mesaValor[0]<mesaValor[1]){
-                                if(trucoTrue==true){
-                                    puntos2+=2;
-
-                                    muestra1.innerText= puntos1;
-                                    muestra2.innerText= puntos2;
-                                }else{
-                                    puntos2++;
-
-                                    muestra1.innerText= puntos1;
-                                    muestra2.innerText= puntos2;
-                                }
+                                trucoTrue? puntos2+=2: puntos2++
                                 
                             }else if(mesaValor[0]==mesaValor[1]){
                                 alert('se ha hecho parda')
                             }
+                            muestra1.innerText= puntos1;
+                            muestra2.innerText= puntos2;
                         }
                         
                     } 
@@ -277,3 +266,22 @@ if (puntos1==30){
     main.classList.remove('true');
     main.classList.add('falso');
 }
+
+let main= document.getElementById('main');
+
+fetch("jugadores.json")
+    .then((res)=>res.json())
+    .then((data)=>{
+        data.forEach((usuario)=>{
+            const li = document.createElement('li');
+            li.innerHTML= `
+                <h4>${usuario.nombre}: ${usuario.partidas}</h4>
+                <h4>${usuario.nombre}: ${usuario.partidas}</h4>
+                <h4>${usuario.nombre}: ${usuario.partidas}</h4>
+                <h4>${usuario.nombre}: ${usuario.partidas}</h4>
+                <h4>${usuario.nombre}: ${usuario.partidas}</h4>
+                
+            `;
+            main.append(li);
+        });
+    });
