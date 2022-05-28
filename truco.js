@@ -58,6 +58,11 @@ let mesaValor=[]; //Informacion para ver resultado
 let mesaEnvido=[];
 let mesaVer2=[];
 let mesaVer1=[];
+let pos=0;
+let puntosMano1=0;
+let puntosMano2=0;
+let moverse=0;
+
 
 let trucoTrue= false;
 let envidoTrue= false;
@@ -65,175 +70,190 @@ let envidoTrue= false;
 let muestra1= document.getElementById('puntos-1');
 let muestra2= document.getElementById('puntos-2');
 
-if(puntos1<30 || puntos2<30){
-    let cantarTruco= document.getElementById('truco');
-    cantarTruco.addEventListener('click', (e)=>{
-        trucoTrue=true;
-        alert('truco');
-    });
-    let envidos= document.getElementById('envido');
-    envidos.addEventListener('click', (e)=>{
-        envidoTrue=true;
-        envidos.classList.add('falso')
-        function envido(jugador){
-            if(envidoTrue==true){
-            if(jugador[0].palo==jugador[1].palo && jugador[0].palo==jugador[2].palo && jugador[1].palo==jugador[2].palo){
-                max1=jugador[0].tanto;
-            if(jugador[1].tanto>max1){
-                    max1= jugador[1].tanto
-            }else{
-                    max12=jugador[1].tanto
-            }
 
-            if(jugador[2].tanto>max12){
-                max12=jugador[2].tanto;
-            }
-
-            mesaEnvido.push(20+max1+max12);
-
-            }else if (jugador[0].palo==jugador[2].palo){
-                mesaEnvido.push(20+jugador[0].tanto+jugador[2].tanto)
-            }else if(jugador[1].palo==jugador[2].palo){
-                mesaEnvido.push(20+jugador[1].tanto+jugador[2].tanto)
-            }else if(jugador[0].palo==jugador[1].palo){
-                mesaEnvido.push(20+jugador[0].tanto+jugador[1].tanto)
-
-            }else{
-                mesaEnvido.push(0)
-            }
-            } 
-            
-        }
-        envido(guardarJugador1);
-        envido(guardarJugador2);
-        
-        if(mesaEnvido[0]>mesaEnvido[1]){
-            puntos1+=2;
-
-            muestra1.innerText= puntos1;
-            muestra2.innerText= puntos2;
+let cantarTruco= document.getElementById('truco');
+cantarTruco.addEventListener('click', (e)=>{
+    trucoTrue=true;
+    alert('truco');
+});
+let envidos= document.getElementById('envido');
+envidos.addEventListener('click', (e)=>{
+    envidoTrue=true;
+    envidos.classList.add('falso')
+    function envido(jugador){
+        if(envidoTrue==true){
+        if(jugador[0].palo==jugador[1].palo && jugador[0].palo==jugador[2].palo && jugador[1].palo==jugador[2].palo){
+            max1=jugador[0].tanto;
+        if(jugador[1].tanto>max1){
+                max1= jugador[1].tanto
         }else{
-            puntos2+=2;
-            muestra1.innerText= puntos1;
-            muestra2.innerText= puntos2;
+                max12=jugador[1].tanto
         }
 
-    });
-
-    function mezclar(jugador, guardado, clase){
-        let random1=Math.trunc((Math.random()*40)+1); 
-        let random2=Math.trunc((Math.random()*40)+1);
-        let random3=Math.trunc((Math.random()*40)+1);
-        do{
-            if((random1==random2 || random1==random3) && (random1>20 ||random1<=40)){ //ver como solucionar el problema de numero 40
-                random1--;
-            }else if((random2==random3) && (random2>20 ||random2<=40)){
-                random2--;
-            }else if((random1==random2 || random1==random3) && (random1>1 ||random1<=20)){
-                random1++;
-            }else{
-                random2++
-            }
-        }while(random1==random2 || random1==random3 || random3==random2);
-       
-
-        function randomizar(varRandom){
-            for(let i=0; i<copiaCartas.length; i++){
-                if(copiaCartas[i].id===varRandom){
-                    guardado.push(copiaCartas[i]);
-                    jugador.push(copiaCartas[i].numero+' '+copiaCartas[i].palo);
-                }
-            }
+        if(jugador[2].tanto>max12){
+            max12=jugador[2].tanto;
         }
 
-        randomizar(random1);
-        document.getElementsByClassName(clase)[0].innerText= jugador[0];
-        randomizar(random2);
-        document.getElementsByClassName(clase)[1].innerText= jugador[1];	
-        randomizar(random3);
-        document.getElementsByClassName(clase)[2].innerText= jugador[2]
+        mesaEnvido.push(20+max1+max12);
 
+        }else if (jugador[0].palo==jugador[2].palo){
+            mesaEnvido.push(20+jugador[0].tanto+jugador[2].tanto)
+        }else if(jugador[1].palo==jugador[2].palo){
+            mesaEnvido.push(20+jugador[1].tanto+jugador[2].tanto)
+        }else if(jugador[0].palo==jugador[1].palo){
+            mesaEnvido.push(20+jugador[0].tanto+jugador[1].tanto)
 
-    } 
-
-    mezclar(manoJugador1, guardarJugador1, 'cartaJugador-1');
-    mezclar(manoJugador2, guardarJugador2, 'cartaJugador-2');
-
-
-    function jugar(clases){
-
-        let tocarCarta= document.querySelectorAll(clases);
-
-        tocarCarta.forEach(element => {
-
-            element.addEventListener('dblclick', (e)=>{
-                
-                function mostrarCartas(clase, id, lugar){
-                    let evento= e.target.classList.contains(clase);
-                    
-                    if(evento){
-                        let sacar= document.getElementById(clase).innerHTML;
-                        lugar.push(sacar);
-                        
-                        console.log('funciona')
-                        document.getElementById(clase).classList.add("falso");
-                        document.getElementById(clase).classList.remove("true");
-                        document.getElementById(id).classList.remove("falso");
-                        document.getElementById(id).innerText= lugar[0];
-                        let valor2= mesaVer2.toString().split(' ');
-                        let valor1= mesaVer1.toString().split(' ');
-                        
-                        if(id=='mesa1'){
-                            for(let i=0; i<copiaCartas.length; i++){
-                                if(valor1[0]==copiaCartas[i].numero && valor1[1]==copiaCartas[i].palo ){
-                                mesaValor.push(copiaCartas[i].valor);
-                                }   
-                            }
-                        }else{
-                            for(let i=0; i<copiaCartas.length; i++){
-                                if(valor2[0]==copiaCartas[i].numero && valor2[1]==copiaCartas[i].palo){
-                                mesaValor.push(copiaCartas[i].valor);
-                                }
-                            }
-                        }
-                        
-                        if(mesaVer1==true && mesaVer2==true){
-                            mesaVer1.pop();
-                            mesaVer2.pop();
-                        }
-
-                        if((mesaValor[0]!=false) && (mesaValor[1]!=false)){
-                            
-                            if(mesaValor[0]>mesaValor[1] && mesaValor[1]!=undefined){
-                                trucoTrue? puntos1+=2: puntos1++;
-                                
-                            }else if(mesaValor[0]<mesaValor[1]){
-                                trucoTrue? puntos2+=2: puntos2++;
-                                
-                            }else if(mesaValor[0]==mesaValor[1]){
-                                Swal.fire('Se ha hecho parda')
-                            }
-                            muestra1.innerText= puntos1;
-                            muestra2.innerText= puntos2;
-                        }
-                        
-                    } 
-                }
-                
-                mostrarCartas('carte1', 'mesa2', mesaVer2 );
-                mostrarCartas('carte2', 'mesa2', mesaVer2 );
-                mostrarCartas('carte3', 'mesa2', mesaVer2 );
-                mostrarCartas('carta1', 'mesa1', mesaVer1 );
-                mostrarCartas('carta2', 'mesa1', mesaVer1 );
-                mostrarCartas('carta3', 'mesa1', mesaVer1 );
-
-                
-            });
-        });
+        }else{
+            mesaEnvido.push(0)
+        }
+        } 
         
     }
-    jugar('.cartaJugador-2');
-    jugar('.cartaJugador-1');
+    envido(guardarJugador1);
+    envido(guardarJugador2);
+    
+    mesaEnvido[0]>mesaEnvido[1]? puntos1+=2:puntos2+=2;
+
+    muestra1.innerText= puntos1;
+    muestra2.innerText= puntos2;
+});
+
+function mezclar(jugador, guardado, clase){
+    let random1=Math.trunc((Math.random()*40)+1); 
+    let random2=Math.trunc((Math.random()*40)+1);
+    let random3=Math.trunc((Math.random()*40)+1);
+    
+    do{
+        if((random1==random2 || random1==random3) && (random1>20 ||random1<=40)){ 
+            random1--;
+        }else if((random2==random3) && (random2>20 ||random2<=40)){
+            random2--;
+        }else if((random1==random2 || random1==random3) && (random1>1 ||random1<=20)){
+            random1++;
+        }else{
+            random2++
+        }
+    }while(random1==random2 || random1==random3 || random3==random2);
+    
+
+    function randomizar(varRandom){
+        for(let i=0; i<copiaCartas.length; i++){
+            if(copiaCartas[i].id===varRandom){
+                guardado.push(copiaCartas[i]);
+                jugador.push(copiaCartas[i].numero+' '+copiaCartas[i].palo);
+            }
+        }
+    }
+
+    randomizar(random1);
+    document.getElementsByClassName(clase)[0].innerText= jugador[0];
+    randomizar(random2);
+    document.getElementsByClassName(clase)[1].innerText= jugador[1];	
+    randomizar(random3);
+    document.getElementsByClassName(clase)[2].innerText= jugador[2]
+
+
+} 
+
+mezclar(manoJugador1, guardarJugador1, 'cartaJugador-1');
+mezclar(manoJugador2, guardarJugador2, 'cartaJugador-2');
+
+
+function jugar(clases){
+
+    let tocarCarta= document.querySelectorAll(clases);
+
+    tocarCarta.forEach(element => {
+
+        element.addEventListener('dblclick', (e)=>{
+            
+            function mostrarCartas(clase, id, lugar){
+                let evento= e.target.classList.contains(clase);
+                
+                if(evento){
+                    let i=0;
+                    let sacar= document.getElementById(clase).innerHTML;
+                    lugar.push(sacar);
+                    
+                    console.log('funciona')
+                    document.getElementById(clase).classList.add("falso");
+                    document.getElementById(clase).classList.remove("true");
+                    document.getElementById(id).classList.remove("falso");
+                    document.getElementById(id).innerText= lugar[pos];
+                    let valor2= mesaVer2.toString().split(' ');
+                    let valor1= mesaVer1.toString().split(' ');
+                    
+                    if(id=='mesa1'){
+                        for(let i=0; i<copiaCartas.length; i++){
+                            if(valor1[0]==copiaCartas[i].numero && valor1[1]==copiaCartas[i].palo ){
+                            mesaValor.push(copiaCartas[i].valor);
+                            }   
+                        }
+                    }else{
+                        for(let i=0; i<copiaCartas.length; i++){
+                            if(valor2[0]==copiaCartas[i].numero && valor2[1]==copiaCartas[i].palo){
+                            mesaValor.push(copiaCartas[i].valor);
+                            }
+                        }
+                    }
+                    if((mesaValor[0]!=false) && (mesaValor[1]!=false)){
+                        
+                        if(mesaValor[moverse]>mesaValor[moverse+1] && mesaValor[1]!=undefined){
+                            puntosMano1++;
+                            
+                        }else if(mesaValor[moverse]<mesaValor[moverse+1]){
+                            puntosMano2++;
+                        }
+
+                        if(puntosMano1>=2){
+                            trucoTrue? puntos1+=2: puntos1++;
+                            mezclar(manoJugador1, guardarJugador1, 'cartaJugador-1');
+mezclar(manoJugador2, guardarJugador2, 'cartaJugador-2');
+                        }else if(puntosMano2>=2){
+                            trucoTrue? puntos2+=2: puntos2++;
+                            mezclar(manoJugador1, guardarJugador1, 'cartaJugador-1');
+mezclar(manoJugador2, guardarJugador2, 'cartaJugador-2');
+                        }
+
+                        muestra1.innerText= puntos1;
+                        muestra2.innerText= puntos2;
+                        moverse++;
+                        if(mesaValor.length==3){
+                            moverse=2;
+                        }else if(mesaValor.length==5){
+                            moverse=4;
+                        } 
+                    }
+                    
+                    
+                } 
+                
+            }
+            
+            mostrarCartas('carte1', 'mesa2', mesaVer2);
+            mostrarCartas('carta1', 'mesa1', mesaVer1);
+            mostrarCartas('carte2', 'mesa2', mesaVer2);
+            mostrarCartas('carta2', 'mesa1', mesaVer1);
+            mostrarCartas('carte3', 'mesa2', mesaVer2);
+            mostrarCartas('carta3', 'mesa1', mesaVer1);
+
+
+            mesaVer1.pop();
+            mesaVer2.pop();
+            
+        });
+    });
+    
+}
+
+   
+jugar('.cartaJugador-2');
+jugar('.cartaJugador-1');
+    
+    
+    
+
+    
 
     const toast= e=>{
         toast.error('Loageate amigo!');
@@ -257,7 +277,7 @@ if(puntos1<30 || puntos2<30){
             className: 'arreglosSi'
         }).showToast();
     }
-}
+
 
 if (puntos1==30){
     alert('jugador1 ha ganadooo!!!');

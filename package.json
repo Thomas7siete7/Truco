@@ -1,0 +1,29 @@
+{
+  "name": "truco",
+  "version": "1.0.0",
+  "description": "Truco coderhouse",
+  "main": "truco.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon truco.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Thomas7siete7/Truco.git"
+  },
+  "keywords": [
+    "Truco",
+    "proyecto",
+    "argentina",
+    "coderhouse"
+  ],
+  "author": "thomas marin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Thomas7siete7/Truco/issues"
+  },
+  "homepage": "https://github.com/Thomas7siete7/Truco#readme",
+  "dependencies": {
+    "nodemon": "^2.0.16"
+  }
+}

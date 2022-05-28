@@ -49,6 +49,12 @@ html{
     font-size: 3rem;
 }
 
+.frase{
+    color: aliceblue;
+    font-size: 2rem;
+    margin-left: 20rem;
+}
+
 .manoJugador{
     height: 10rem;
     display: flex;
